@@ -3,25 +3,51 @@ package restaurant;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 public class Menu {
-    public static void main(String[] args) {
-        ArrayList<MenuItem> menu = new ArrayList<>();
 
-        MenuItem item = new MenuItem(3.0, "burger", "main course", LocalDate.of(2022, 1, 12));
-        MenuItem itemTwo = new MenuItem(6.0, "salad", "appetizer", LocalDate.of(2021, 12, 28));
-        MenuItem itemThree = new MenuItem(5, " cake", "dessert", LocalDate.of(2020,8, 17));
+    private Date dateLastUpdated;
 
-        menu.add(item);
-        menu.add(itemTwo);
-        menu.add(itemThree);
+    private ArrayList<String> categories = new ArrayList<>(
+            Arrays.asList("appetizer", "main course", "dessert")
+    );
 
-        for(MenuItem i: menu) {
-            System.out.println("price: " + i.getPrice());
-            System.out.println("Description: " + i.getDescription());
-            System.out.println("Category: " + i.getCategory());
-            System.out.println("LocaleDate: " + i.getDate());
+    private ArrayList<MenuItem> items;
+
+    public Menu(ArrayList<MenuItem> items) {
+        this.items = items;
+        this.dateLastUpdated = new Date();
+    }
+
+    // Getters
+    public ArrayList<MenuItem> getItems() {
+        return items;
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
+    public Date getDateLastUpdated() {
+        return dateLastUpdated;
+    }
+
+    // Method to add menu item
+    public void addMenuItem(MenuItem item) {
+        this.items.add(item);
+    }
+
+    // Method to delete menu item
+    public void removeMenuItem(MenuItem item){
+        this.items.remove(item);
+    }
+
+    public void printMenu() {
+        System.out.println("Restaurant Menu");
+        for (MenuItem menuItem : items) {
+            System.out.println(menuItem.toString() + "\n");
         }
-
     }
 }
